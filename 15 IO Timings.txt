@@ -1,0 +1,176 @@
+a) What are types of IO operations
+
+a) Get data out of RAM
+
+	in program , when accessing variable --> CPU fetches data from RAM (ns)
+
+
+	//should we do it synchronous or asynnc? sync	//v fast
+
+b) Read Disk		//file system
+
+	use case: programs reading configuration data fetch data from disk   (1ms)		//SSD is faster
+
+	means: retrieving settings from config file
+
+	//Should we do it sync or async? sync problematic in some cases--> async / sync
+
+
+c) Network
+	Ex
+		HTTP Requests : 100ms to 2000ms (2sec)		//slow	 //async
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+a) await keyword:
+
+
+What we learnt about promises?
+	.then()
+	
+	.raw()
+
+	.catch()
+
+
+//these callbacks are executed if promise resolves / rejected
+
+
+await  : new syntax to interact with promises
+
+await >> .then()
+
+
+
+ex1) .then
+
+the below promise will either resolve or reject
+callback function passed using .then
+takes input : rresults of promise
+
+promise.then((message) => {
+	console.log("Resolved with ${message}")
+}).
+
+
+ex2) await()			//write async code  //looks like sync
+//no callback function
+doesnt evaluate until promise resolves
+	after promise resolve -->saves/returns in message varaible --> log on screen
+
+
+const message = await promise
+console.log(Resolved with ${message}')
+
+
+//What await() made to wait until promise resolved? Only the particular part of code //not the entire JS engine
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Assignment:
+
+Given : applyDamage()
+Inputs:	
+damage = 25
+curentHP = 50
+
+
+//to be added
+const message = await applyDamage(25,50)		//why await? new promise returned	//save value in a variable message
+//
+console.log(message)
+function applyDamage(damage, currentHP) {													//takes input
+	return new Promise((resolve) => {													//returns promise
+	const newHP = currentHP - damage													//50 - 25
+	setTimeout(() => {																//await returned promise
+	resolve(‘The player with ${currentHP} hit points suffers ${message	} points of damage and has ${newHP} hit points remaining	//save resolved value into variable
+}, 1000)
+})
+}
+
+
+>Output:
+The player with 50 hit points suffers 25 points of damage 
+and has 25 hit points remaining
+
+
+ex3) async keyword
+	await() replaced .then
+			async replaced new promise()  syntax		//new way to create promise
+
+	How it works?
+		if function specified async --> new promise returned automatically
+
+		What will be resolved value? value returned from promi se
+
+Old:
+
+function getPromiseForUserData(){					//create function	
+	return new Promise((resolve) => {				//return new promise
+	fetchDataFromServerAsync().then(function(user){
+	resolve(user)								//resolves some value
+	})
+   })
+}
+const promise = getPromiseForUserData()
+
+
+New:
+
+async function getPromiseForUserData(){				//function automatically returns new promise	 
+const user = await fetchDataFromServer()				
+return user									//what value resolved? whatever use returned from function
+										//Where can we use await keyword? within async function
+}
+
+const promise = getPromiseForUserData()
+
+
+++++++++++++++++++++++++++
+What learn?
+
+How async and await allow us to do lots of async operations while wriitng v clean code (that looks sync) 		//helps dev think about async code in sync way
+
+await : use in async functions & top level bodies of modules
+
+
+
+function getItemData() {												//function is sync function					
+const response = await fetch('https://api.boot.dev/v1/courses_rest_api/learn-http/items',		// await is inside a function 	//make HTTP call			
+return response.json()												//parse response data as JS object
+}
+// don't touch below this line
+const items = await getItemData()										// await at top level body of module
+logItems(items)
+function getSettings() {
+return {
+method: 'GET',
+mode: 'cors',
+headers: {
+'X-API—Key': 'Testing',
+'Content—Type': 'application/json'
+
+Error:use in async functions & top level bodies of modules
+
+//Why error? function was a sync function
+// if we mark it as sasync ---> wraps up entire function in a promise
+ if promise resolves
+
+
+
+
+async function getItemData() {												//function is sync function					
+const response = await fetch('https://api.boot.dev/v1/courses_rest_api/learn-http/items',		// await is inside a function 	//make HTTP call			
+return response.json()												//parse response data as JS object
+}
+// don't touch below this line
+const items = await getItemData()										// await at top level body of module
+logItems(items)
+function getSettings() {
+return {
+method: 'GET',
+mode: 'cors',
+headers: {
+'X-API—Key': 'Testing',
+'Content—Type': 'application/json'
+
+
+>Output: 
+All item data receiving

@@ -1,0 +1,120 @@
+a) What are URL paths?
+	How URL paths related to modern servers
+
+b) What tradditional servers do: map file path on server ----- URL path
+	//URL path in http request
+
+c) for ex this is URL on traditional server : testdomain.com/root/next
+
+d) HTTP paths: treated differently in web applications
+		   treated differently in websites
+
+
+API CONVENTION:
+
+e) boot dev api is not traditional file server
+Look at code to understand:
+
+
+	e.1)  https://api.boot.dev/v1/courses_rest_api/learn—http =version of api we are interacting with
+		If there were big changes to api ? just change v1 endppoint to v2 endpoint
+		//if someone wants to use new version of api -> use v2 path
+		
+	e.2) For ex
+		separate api for students to work : 		/v1/courses_rest_api/learn—http/locations 	-> boot.dev made an api "learn-htttp" for its students, "locations" = what resource we accessing
+		separate api for powering website 
+	
+Assignment objective: fix getResources()
+
+0) Define geResources() 
+	take path as input
+	store api endopoint it is interacting with
+	specify GET type of request
+	specify mod
+	specify what headers
+	await for response.json
+	return resources 
+
+1)  get locations using getResources and specify "locations" in URL
+	store response we got from getResources in locations
+	log out the Locations using logResources()
+
+2)  get items using getResources and specify "locations" in URL
+	store response we got from getResources in locations
+	log out the Locations using logResources()
+
+3) get users using getResources and specify "locations" in URL
+	store response we got from getResources in locations
+	log out the Locations using logResources()
+
+Soln: the path passed needs to be used in fullURL
+
+
+async function getResources(path) {
+const fullURL = 'https://api.boot.dev${path}' 							//const fullURL = 'https://api.boot.dev/'
+const response = await fetch(fullURL, {
+method: 'GET',
+mode: 'cors',
+headers: {
+'X-API-Key': generateKey(),
+'Content—Type': 'application/json'
+}
+})
+const resources = await response.json()
+return resources
+}
+// don't touch below this line
+const locations = await getResources('/v1/courses_rest_api/learn—http/locations')	//note how it doesnt contain full URL
+console.log('Locations:')	
+logResources(locations)
+console.log('----')
+
+
+const items = await getResources('/v1/courses_rest_api/learn—http/items')		////note how it doesnt contain full URL
+console.log('Items:')
+logResources(items)
+console.log('----')
+
+const users = await getResources('/v1/courses_rest_api/learn—http/users')		//note how it doesnt contain full URL
+console.log('Users:')
+logResources(items)
+console.log('----')
+
+
+>Output:
+Locations:
+
+- {"discovered":false,"id":"0194fdc2-fa2f—4cc0-81d3-ff12045b73c8","name":"Bandit
+Camp","recommendedLevel":14}
+
+- {"discovered":true,"id":"52fdfc07—2182-454f—963f—5f0f9a621d72","name":"Heartfin
+Marsh","recommendedLevel":1}
+
+- {"discovered":false,"id":"2f8282cb-e2f9—496f—b144-
+c0aa4ced56db","name":"Irondeep","recommendedLevel":6}
+
+- {"discovered":false,"id":"85fbe72b-6064—4890—84a5—
+31f967898df5","name":"Lakewood","recommendedLevel":8}
+
+- {"discovered":true,"id":"e2807d9c—1dce—46af—80ca—
+81d4fe11c23e","name":"Silverfall","recommendedLevel":9}
+
+
+Items:
+
+— {"id":"0194fdc2—fa2f—4cc0-81d3-ff12045b73c8","name":"Healing
+Potion","quality":4}
+- {"id":"52fdfc07-2182-454f-963f-5f0f9a621d72","name":"Light Leather","quality":1}
+- {"id":"2f8282cb—e2f9-496f—b144—c0aa4ced56db","name":"Padded
+
+Leather","quality":6} . 1 , , —
+
+
+Users: 
+
+— {"characterName":"Grundorf","class":"Warrior","id":"0194fdc2-fa2f—4cc0-81d3—
+ff12045b73c8","level":14,"pvanabled":false,"user":
+{"name":"Lane","location":"USA","age":27}} [-1-
+
+- {"characterName":"Varus","class":"Fighter","id":"52fdfc07-flI " I
+5f0f9a621d72","level":1,"pvanabled":true,"user": .‘ Im:i"

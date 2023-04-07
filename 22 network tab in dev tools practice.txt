@@ -1,0 +1,32 @@
+a) We learnt how we (client) can send headers (previous note)
+
+b) Can server also send header back in response
+
+
+
+
+a) Are header values always numbers?
+	We can see it has strings also
+	for ex
+	access-controI-allow-origin: retc
+
+
+b) Is status code no.? no. --> string
+
+c) Content-type = what type of data being sent in response
+possible values for Content-type? image/png , application/json
+
+General
+Request URL:
+
+Request Method: 
+
+Status Code:
+
+Referrer Policy
+
+a.2) Response Headers
+	Content-type: image/png
+a.3) Request Headers
+	Referer:
+	User-Agent

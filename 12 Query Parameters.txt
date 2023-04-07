@@ -1,0 +1,31 @@
+We learnt
+
+	a) What changing path does? 			Changes entire webpage/resource
+
+	b) What changing query parameter does?	Changes something small
+
+
+	What small? metadata/filtering option
+
+
+
+a) If Google -->"Hello World"
+
+
+b) Check URL
+https://www.google.com/search?q=hello+world&sxsrf=AJOqlzXoOHzmEXljSeRVVXM3eO5kJlUZog%3A1676852312240&source=hp&ei=WLzyY76aDbas4-EP4PmK0AY&iflsig=AK50M_UAAAAAY_LKaI1des4P8L6OuXqsziEzyNvOf3uS&ved=0ahUKEwi-pqTT6aL9AhU21jgGHeC8AmoQ4dUDCAg&uact=5&oq=hello+world&gs_lcp=Cgdnd3Mtd2l6EAMyCwgAEIAEELEDEIMBMgUIABCABDILCAAQgAQQsQMQgwEyBAgAEEMyBQgAEIAEMggIABCABBCxAzILCAAQgAQQsQMQgwEyCAgAEIAEELEDMggIABCABBCxAzIFCAAQgAQ6BAgjECc6BQgAEJECOgcIABCxAxBDOgoIABCxAxCDARBDOgoILhDHARDRAxBDOgQILhBDOgUILhCABFAAWLMJYMgKaABwAHgAgAGmAYgB2wySAQQwLjExmAEAoAEB&sclient=gws-wiz
+
+?q=hello+world	//our search used in url //as query parameter
+?			//separates query parameter
+q=hello+world 	//query parameter
+key = q, value = hello+world
+&			//separates other key-value pairs
+
+Million possible searches //cant have separate page for each
+instead Use path
+
+
+
+c) Are query parameters mandatory? No
+
+

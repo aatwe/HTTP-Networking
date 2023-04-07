@@ -1,0 +1,58 @@
+a) What is http header?
+
+	How to pass additional info with each request/response? HTTP Header
+
+	client -----------server	//pass addition info using header
+					//data about the data //metadata
+
+ex Metadata
+	type of client (person sending request is on)
+	what OS
+	what preferred language
+	etcc
+
+
+b) Ex 
+	Body of request = item data of game
+	
+
+ex Body:	iron sword,
+	    	bronze sword
+	   	wooden arrow
+		etc
+
+	if have to change currency for pricing page based on location
+	location data in header as meta data
+
+
+Q) How to access headers?
+Request.headers
+Response.headers
+
+Q)
+Headers.get()
+
+++++++++++++++++++++++++++++++++++++++++++++++++++=
+Assignment
+	Complete logContentType()
+	Shouls log out content type header to console
+
+Soln:
+
+
+function logContentType(resp) {	//resp = repsonse object as input
+	const headerVal = resp.headers.get('content-type')			//content-type is a really common header in HTTP requests  ///what kind of data is being sent // JSON (string looks like JS object ), HTML (render in browser), CSS, plain text etc data formats
+	console.log(headerVal)							//>Output: application/json								
+}	
+
+const apiKey = generateKey() 
+const bootdevAPIDomain = 'api.boot.dev'
+
+const items = await getItemData(bootdevAPIDomain)
+IogContentType(items)
+async function getItemData(domain) {
+
+const response = await fetch(‘https://${domain}/v1/courses_rest		//what comes back after fetch call
+method: 'GET',			//http response object
+mode: 'cors',
+headers: {

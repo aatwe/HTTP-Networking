@@ -1,0 +1,14 @@
+PUT: Updates entire resources
+PATCH: updates partial resources
+	How?
+
+
+a) FOR PUT : we specify id in url to tell which user to update
+	then we send entire user object
+	can do partial update also though (read documentation)
+
+b) FOR PATCH:
+	Update just a name field
+
+
+Conclusion: PUT > PATCH (popular)

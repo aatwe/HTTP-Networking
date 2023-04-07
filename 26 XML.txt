@@ -1,0 +1,46 @@
+a) When to use XML? alternative for JSON		//more used than JSON
+								//XML used in legacy code : HTTP requests
+								//why more used? easy to read ,write	//have to write key once, instead of 2 tags
+b) both xml and json are used to send data in http requests
+
+
+c) XML Syntax
+
+<root>
+<id>1</id>
+<genre>Action</genre> a
+<title>Iron Man</title>
+<director>Jon Favreau</director>
+</root>
+
+
+d) Same XML in JSON
+
+{
+"id": "1",
+"genre": "Action",
+"title": "Iron Man",
+"director": "Jon Favreau"
+}
+
+
+what difference?
+	XML							JSON
+	<root>					-->	 { } 
+	<tag> value </tag> for each field    	-->	"key" : "value",
+	
+
+
+
+e) What more popular? JSOn, we will work with it
+
+f) another use case of JSON and xml: configuration files
+	Ex configure settings in repo, dependency management system, softwarethat reads config data on startup
+
+g)  Ex u are backend dev, configuring project OR helping design an API
+
+	How to structure config files? try to use JSON
+						//less in size
+						//readable
+
+	

@@ -1,0 +1,102 @@
+a) What are status codes in http request?
+	How to check if http request went the correct way? status code
+	
+
+
+b) What if error was produced? second layer that we need to pass
+
+first no error condition ---> then status code
+
+
+
+c) If something goes wrong -> will produce an error
+
+Client ---------->  Server
+	<---------
+
+
+ex of error scenarios: (something goes wrong in sender --> receiver line)
+		domain name in fetch api is wrong -> error in fetch  api
+		internet connection down -> error in fetch api
+ex of status code scenarios
+		request reached server, but processing of request went wrong at server
+		no permission to access resource
+		backend server is down	
+		
+d) where is status code? In response http request
+	
+
+	when error occur? if something goes wrong
+	when status code occur ? everytime
+		every response has status code
+			
+
+
+
+STATUS CODES:
+
+1XX : Infromation response
+2XX : See often,success codes
+	200 : everything worked
+	201 : Resource created (POST usually)
+	
+	
+3XX : redirection messages
+	301 : Resource moved to new place, response will tell where the new place is , use case: website change domain name
+4XX : Client errors  //authentication 
+	400 : Bad request
+	403 : Unauthorized : Client does not have correct permission. Ex dont have session token 
+	404 : Not Found : Resource does not exist
+5XX : Server errors
+	500 : Internal server error
+
+
+//HTTP response body will tell what happened
+//log it to console
+
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+How ot check status code in actual code? Use .status property on a Response object
+
+Solution:
+
+async function getUserCode(url, apiKey) {
+const response = await fetch(url, {
+method: 'GET',
+mode: 'cors',
+headers: {
+'X-API—Key': apiKey
+}
+})
+return response.status
+}
+// Don't touch below this line
+const generatedKey = generateKey()
+
+
+>Output:
+id: invalid—id, status code: 404
+id: 0194fdc2—fa2f—4cc0-81d3—ff12045b72c "It -, status code: 200
+
+
+
+
+Code(earlier)	
+async function getUserCode(url, apiKey) {
+const response = await fetch(url, {
+method: 'GET',
+mode: 'cors',
+headers: {
+'X-API—Key': apiKey
+}
+})
+}
+// Don't touch below this line
+const generatedKey = generateKey()
+
+
+>Output:
+id: invalid—id, status code: undefined
+id: 0194fdc2—fa2f—4cc0-81d3—ff12045b72c "It -
+undefined II'{i\

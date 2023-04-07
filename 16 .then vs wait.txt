@@ -1,0 +1,68 @@
+a) What is a callback function? functon that we handover to another function
+	//we ask the other function to execute that function at some time
+
+
+Ex
+callback function = function called when button clicked
+
+
+Ex of callback function
+
+function callbackFunction(){
+console.log("calling back now!")
+
+}
+
+const milliseconds = 1000
+
+setTimeout(callbackFunction, milliseconds)		//we giving callbackFunction to setTimeout()  // it will execute later
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+b) How callback function relates to our promise API?
+
+	Promise api was more callback based originally
+
+
+
+b.1)  	.then()
+	.catch()
+
+	both of these took function as input --> execute once promise completed
+
+
+The alternative
+	async()
+	await()
+
+	//not callback syntax anymore	//easier to read
+
+Ex
+Approach #1
+
+Code using .then()
+//chained
+---------------------------------
+fetchUser.then(function(user){ 		//fetch user, 
+
+return fetchLocationForUser(user)		//fetch user location, 
+}).then(function(location){
+
+return fetchServerForLocation(location)	//fetch server
+}).then(function(server){
+
+console.log(‘The server is ${server}‘)	//log the data
+});
+
+
+Approach #2
+
+Code using await
+--------------------------------------------
+const user = await fetchUser()		//await //traditional synchronous programming		//fetch user, wait for it  //get user object
+
+const location = await fetchLocationForUser(user)	//fetch user's location , wait for it
+const server = await fetchServerForLocation(location) //fetch server for the location, wait for it
+console.log(‘The server is ${server}‘)			//log result
+
+
+Conclusion: async/await() is cleaner

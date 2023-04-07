@@ -1,0 +1,167 @@
+How to update a resource? HTTP PUT!
+
+HTTP PUT vs HTTP POST
+
+
+a) POST: for creating resource
+	a.1) Why not idmepotent? Rely on server to generate new IDs for new resources
+	a.2) Why cannot update
+		 if you create 2 post request, server will generate 2 new ids for new resources	//cannot udpate
+
+b) PUT  : for creating / updating resource	//Safer
+	b.1) PUT is Idempottent : can send PUT request --> multiple times 	//Smart server	//Safer
+		How idempotent? We specify id of what resource we updating
+						
+Note: HTTP PUT: is common
+	There is also HTTP PATCH
+
+
+
+Scenario: Give endpoint data using PUT request
+	a) Server will create if it doesnt exist
+		
+	b) Server will update if it exists
+
+
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Assignment:
+
+Objective: update fantasy quest char using PUT, retrieve that using GET
+
+a) UpdateUser()  		//updates one user //specify id
+and getUserById()	 	//retrieve individual user resources
+
+//both function will return a promise
+//when promise resolves? JSON response //await	
+
+Solution:
+a.1) In updateUser() ->  write await fetch()		//pass baseURL, id,data, apiKey
+	specify what url : include baseURL + what id of resource to update
+	specify what method
+	specify type of data in header
+	In body: stringify the data	//send the new fields
+	return a promise that resolves to the center spot
+
+
+a.2) in getUserById						//pass baseURL,id,apiKey
+	specify what url : include baseURL + what id of resource to update
+
+
+a.3) In body of request
+	what useId:
+	what generatedKey
+	what is baseURL: server url	//notice how we hitting users endpoint to get users //also we add our id after it
+	
+	logUser()
+	Change user data (char name, level, class etc)
+
+a.4) updateUser()				//pass in new modified data
+	getUsers again
+-------------------------------------------------------------------------------------------------------------------------------------
+
+async function updateUser(baseURL, id, data, apiKey) {
+const fullURL = ‘${baseURL}/${id}‘
+const resp = await fetch(fullURL, {
+	method: 'GET'
+	mode: 'cors'
+	headers: {
+		'Content-type': 'application/json'
+	},
+	body: JSON.stringiify(data)
+})
+	return resp.json()
+
+}
+
+async function getUserById(baseURL, id, apiKey) {
+const fullURL = ‘${baseURL}/${id}‘			
+const resp = await fetch(fullURL, {
+	method: 'GET'
+	mode: 'cors'
+	headers: {
+		'Content-type': 'application/json'
+		'X-API-KEY': apiKey
+	},
+	body: JSON.stringiify(data)
+})
+	return resp.json()
+
+
+}
+
+const userId = '2f8282cb—e2f9—496f—b144—c0aa4ced56db'
+const generatedKey = generateKey()
+const baseURL = 'https://api.boot.dev/v1/courses_rest_api/learn-http/users'	//notice how we hitting users endpoint to get users
+function generateKey() {
+const characters = 'ABCDEF0123456789'
+let result = "
+for (let i = 0; i < 16; i++) {
+result += characters.charAt(Math.floor(Math.random() * characters.length))
+}
+return result
+}
+
+function logUser(user) {
+console.log(‘User uuid: ${user.id}, Character Name: ${user.characterName}, Class: ${usc
+} 
+
+const userData = await getUserById(baseURL, usefId, generatedKey)
+logUser(userData)
+
+console.log(‘Updating user with id: ${userId}‘)
+userData.characterName = 'Dellbiar'
+userData.level = 7
+userData.class = 'Warrior'
+userData.pvanabled = t{ue
+userData.user.name = 'Allan‘
+await updateUser(baseURL, userId, userData, generatedKey)
+
+const newUser = await getUserById(baseURL, userId, generatedKey)
+logUser(newUser)
+
+
+---------------------------------------------------------------------------
+>Output:
+
+User uuid: 2f8282cb—e2f9-496f-b144-c0aa4ced56db, Character Name: Velithria,
+Class: Wizard, Level: 6, PVP Status: false, User name: Tim
+
+Updating user with id: 2f8282cb-e2f9-496f-b144-c0aa4ced56db
+
+User uuid: 2f8282cb—e2f9—496f—b144—c0aa4ced56db, Character Name: Dellbiar,
+Class: Warrior, Level: 7, PVP Status: true, User name: Allan
+
+
+
+Conclusion:we updated UID character name, user with a new id
+User fields changed
+
+
+
+
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Code (earlier)
+
+async function updateUser(baseURL, id, data, apiKey) {
+const fullURL = ‘${baseURL}/${id}‘
+// ?
+
+}
+
+async function getUserById(baseURL, id, apiKey) {
+const fullURL = ‘${baseURL}/${id}‘
+// ?
+
+}
+
+const userId = '2f8282cb—e2f9—496f—b144—c0aa4ced56db'
+const generatedKey = generateKey()
+const baseURL = 'https://api.boot.dev/v1/courses_rest_api/learn-h
+function generateKey() {
+const characters = 'ABCDEF0123456789'
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+

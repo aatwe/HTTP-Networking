@@ -1,0 +1,73 @@
+a) What is HTTPS
+
+encryption
+Only sender and receiver can process the info
+
+a.1) Any intermediaries? Yes : ISP , Router owner
+
+	for ex. if http -> on public Wifi --> router owner can see info
+
+	Soln: https
+
+
+a.2) 
+
+Given: Bug
+if we send erquest --> it will fail (error: failed to fetch)		//Server rejecting plain http
+
+Objective: send request over HTTPS
+
+
+b) How to send request over HTTPS?
+
+
+Ex
+
+Client ----> Wifi ----> Router ---> ISP ----> Cloud Provider of server ----> Server
+
+	a.2.1) How to encrypt and decrypt?
+
+		Blue: public key		//use it to encrypt data	//can only use to enncrypt
+			//Given to the client
+
+
+		Red: private key		//use it to decrypt data
+			//Stays on the server
+
+
+	a.2.2) But still how to send server response safely? 3rd key
+
+		Yellow: Encryption key
+			//both receive it 	// can use to encrypt/ decrypt at both end
+
+
+
+How key generation happens?
+
+a.3)
+	0) Client tries to send HTTPS request //cant yet
+//Generate public and pvt key
+	1) Server generates public & private key		//unless this is done https is not enabled	
+	2) Client contacts server
+	3) Server sends its public key generated to client
+
+//Client gets public key
+	4) Client decrypts public key
+	5) Client has the public key
+
+//Secret token generated at client
+	6) for reverse from server, Client generates secret token
+	7) Client sends secret token to server (encrypted the secret token using public key it got)
+
+//Symmetric key generated at both end
+	8) Server Decrypts secret token(using private key it had), Server generates symmetric key, Client generates symmetric key //Symmetric key is negotiated
+//HTTPS lifecyle
+	9) Client sends ---> HTTPs request	
+	10) Server decrypts the HTTPS request successfully
+	11) Server sends encrypted response
+	12( Client decrypts the response
+
+
+
+
+

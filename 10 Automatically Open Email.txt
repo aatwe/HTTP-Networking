@@ -1,0 +1,26 @@
+Given: showing users email of friends
+Objective: clickable llink instead of just email showing
+
+How? mail to URI (protocol) 
+
+
+function getMailtoLinkForEmail(email) {
+return ‘mailto:${email}‘
+	_____
+	mailto protocol
+
+}
+
+// don't touch below this line
+
+let email = 'slayer@fquest.app'							//Given an email
+console.log(‘The mailto link for ${email} is: ${getMailtoLinkForE
+email = 'killer@fquest.app'								//Given another email
+console.log(‘The mailto link for ${email} is: ${getMailtoLinkForE
+
+>
+The mailto link for slayer@fquest.app is:
+mailto:slayef@fquest.app I				//these will be llinks
+
+The mailto link for killer@fquest.ap1\ "‘1'
+mailto:killer@fquest.app I fl): 1

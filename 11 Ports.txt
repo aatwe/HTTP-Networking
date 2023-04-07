@@ -1,0 +1,128 @@
+Why Port?
+What if multiple things hosted on server? How to redirect correct request to correct place? PORTS
+	
+
+
+Host a website + Host a database
+
+
+Port = hubs managed by OS
+	segments data stream
+
+
+
+
+Server
+
+	Web server  ----- Port 80
+
+
+	Database    ------ Port 5432
+
+
+
+What problem solved? can run different insances on same server
+			   can run multiple websites on same server
+
+	2 website on same port? NO. Why? OS wont know
+
+
+
+How many ports on OS allowed? 65,000 different
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+What type of ports we can use?  if dont type port in url, default port used
+		//default port = protocol specific
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Q1) what is localhost:8080		//localhost = domain of my own computer  , 8080 = port
+
+
+
+a) brew install caddy		//else use caddyserver.com
+
+b) Create index.html, name.txt in a directory Test
+Both below files in same directory Test
+index.html
+<> index.html >
+1 <html>
+2
+3 <body>
+4 <h1>HOME PAGE</h1>
+5 </body>
+6
+7 </html>
+8
+
+
+name.txt
+Hi My name is lane
+
+
+	a.1) cd to that directory Test
+
+c) caddy file-server			//Run, default port chosen = 80, domain used= localhost
+
+>Output:
+index.html :
+HOME PAGE
+
+
+Q1) Why not Hi My name is lane?
+
+file server (traditional) ---> routes "path" of directory  (path in url) ---> index.html  //default
+localhost/index.html			//not neccessary
+
+	//Backend servers: like Go and Django ---> different paths , access which file	 //Its all custom logic
+
+Q2) How to get name.txt if want to?
+localhost/name.txt
+
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+What given? user data in Fantasy Quest server
+reaching users endpoint
+'https://api.boot.dev/v1/courses_rest_api/learn—http/locations'
+instead use 
+Objective: get location data
+
+
+
+Output: undefined		//not getting location data back
+https://api.boot.dev/v1/courses_rest_api/learn—http/users' --> https://api.boot.dev/v1/courses_rest_api/learn—http/locations'
+
+//what was the problem? users end point there was no data, we changed url
+-------------------------------------------------------------------------------
+
+const url = 'https://api.boot.dev/v1/courses_rest_api/learn—http/locations'
+
+
+// don't touch below this line
+const apiKey = generateKey()
+const response = await fetch(url, {
+method: 'GET',
+mode: 'cors',
+headers: {
+	'X-API—Key': apiKey,
+	'Content-Type': 'application/json'
+}
+})
+
+
+const responseData = await response.json()		//wait to get response
+
+logLocations(responseData)				//logLocations()	//loops and prints out location.name and location.recommendedLevel
+function generateKey() {
+	const characters = 'ABCDEF0123456789'
+	let result = "
+for (let i = 0; i < 16; i++){
+	result += characters.charAt(Math.floor(Math.random() * characters.length))
+}
+	return result
+}
+function logLocations(locations) {
+	for (const location of locations) {
+		console.log(‘Location: ${location.name}, Recommended Character Level: ${location.recommendedLevel}')
+}
+}
+
+

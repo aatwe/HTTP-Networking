@@ -1,0 +1,175 @@
+Conclusion: how to parse JSON data? .json() method
+
+
+a) What is JSON
+	network requests send different kind of info sent in request body
+
+b) How do we send this data? JSON format
+
+Is JSON a string? Yes
+
+
+c) Ex of JSON object representing aray of movie objects under movie key
+Why use JSON? flexible way to send data using text. Can parse plain text and work with it in our programs
+
+Use case of JSON: 	bring network response inside our code
+			parse the response body
+
+{
+	"movies": [//key
+		{
+		"id": 1,
+		"genre": "Action",
+		"title": "Iron Man",
+		"director": "Jon Favreau",
+	}.
+	{
+		"id": 2,
+		"genre": "Action",
+		"title": "The Avengers",
+		"director": "Joss Whedon"
+	}
+}
+
+
+
+d) Problem: dont want text data in binary format (Cant use in code 0s 1s, need JS friendly text)
+
+Soln: fetch api
+
+const resp = await fetch0(...)
+const javascriptObjectResponse = await resp.json()
+
+//what happens when we make fetch request? we get promise back
+
+//what after we receive promise? wait until promise resolved
+
+//what after promise resolved? get response object
+
+
+
+	1) make fetch request
+	2) wait until promise resolved
+	3) Once promise resolved, get response object
+	4) call .json() method on response object
+			//What this method does? parse textual JSON ---> actual JS object
+	5) return JS object
+
+
+
+async function getLocations() {
+const url = 'httpsz/lapi.boot.dev/vl/courses_rest_api/learn-htt|
+const response = await fetch(url, {
+method: 'GET',
+mode: 'cors',
+headers: {
+'X—API—Key': apiKey,
+'Content—Type': 'application/json'
+}
+})
+// ? Fix code here
+}
+// Don't touch below this line
+const apiKey = generateKey()
+const locations = await getLocations()	//this is the JS object returned
+
+
+console.log('Got some locations from the server.')
+for (const location of locations) {
+console.log(‘— name: ${location.name}, recommendedLevel: ${loca
+}
+function generateKey() {
+const characters = 'ABCDEF0123456789'
+let result = "
+for (let i = 0; i < 16; i++) {
+result += characters.charAt(Math.floor(Math.random() * charac
+}
+
+
+e) 
+	e.1) Verify JSON above, in JSONLint
+	//enter --> validate JSON   	//conclusion: it is valid JSON object
+
+	e.2) If we remove key movies
+	//Still a valid JSON 	//just an array with locaion objects
+	{
+	"movies": [//key
+		{
+		"id": 1,
+		"genre": "Action",
+		"title": "Iron Man",
+		"director": "Jon Favreau",
+	}.
+	{
+		"id": 2,
+		"genre": "Action",
+		"title": "The Avengers",
+		"director": "Joss Whedon"
+	}
+}
+
+
+f) In code we are iterating over this array and logging out each location object
+
+	But we are not getting any thing
+
+Objective fix code:
+
+g) Soln
+	g.1) Call json method on response object
+	g.2) await the promise to get a JS object
+	g.3) return javascript object
+
+
+
+	g.1) + g.2) + g.3) = return response.json()
+
+async function getLocations() {
+const url = 'httpsz/lapi.boot.dev/vl/courses_rest_api/learn-htt|
+const response = await fetch(url, {
+method: 'GET',
+mode: 'cors',
+headers: {
+'X—API—Key': apiKey,
+'Content—Type': 'application/json'
+}
+})
+return response.json()		//line inserted
+}
+// Don't touch below this line
+const apiKey = generateKey()
+const locations = await getLocations()	//this is the JS object returned
+
+
+console.log('Got some locations from the server.')
+for (const location of locations) {
+console.log(‘— name: ${location.name}, recommendedLevel: ${loca
+}
+function generateKey() {
+const characters = 'ABCDEF0123456789'
+let result = "
+for (let i = 0; i < 16; i++) {
+result += characters.charAt(Math.floor(Math.random() * charac
+}
+
+
+h) How is json being parsed into our code?
+	parse:
+		JSON --> JS Objects / arrays 		//for working in javscript language
+		JSON --> arays/ lists / dictionaries	//for working in python language
+		JSON --> slices/maps/structs		//for working in Go language
+
+
+
+
+i) Where JSON data is used? http requests & response  -> body
+//config in desktop can see JSOn files
+//NOSQL database --> use JSON fo their api
+		//MongoDB , Elastic Seach , Firestore
+
+
+j) json fields spearated by comma
+{
+	"make": "Chevy",
+	"year": 2020
+}

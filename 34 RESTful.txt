@@ -1,0 +1,44 @@
+a) What is REST? Representational State Transfer
+
+	What is it? standard & convention for building better APIs
+
+
+b) What is goal of REST api? 
+	adhere to certain rules
+	Better experience to the client
+	
+
+c) What separates RESTful servers from others
+
+	Client: can write in any programming language
+
+
+	Server: can write in any programming language
+
+
+	What common?
+		name for resources, JSON / encoding scheme etc
+
+
+	c.1) How is it stateless? Client and server dont keep track of past interactions they've had
+
+
+	if client requests for 10 users --> Server gives
+	if client requests for 10 more --> Server gives same 10 // Server doesnt remember  and give next 10
+
+
+	CONCLUSION: 	Answers client request
+				Doesnt remember state and modifies its answer
+
+
+	
+	RESTful: tells state of resources
+		   do not tell arbit commands
+
+
+
+d) REST is not mandatory but safer to use
+	other conventions exist: for ex GraphQL
+	d.1) is last part of url always the resource? YES
+
+e) 

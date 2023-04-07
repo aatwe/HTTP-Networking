@@ -1,0 +1,66 @@
+a) Why learn error handling?
+
+	Important when working with HTTP networks
+	many things go wrong in a network
+
+Ex running JS code , Internet connection lost
+not a problem with code.
+How will we handle?
+
+Solution? error handling
+
+++++++++++++++++++++++++++++++++
+b) How to catch error in JS
+
+try {
+	const speed = car.speed				//speed object defined on car object	//if anything goes wrong, catch that error
+} catch (err) {
+	console.log('An error was thrown: ${err}')
+}
+
+++++++++++++++++++++++++++++++++
+Assignment: Below code throwing error --> not handled gracefully
+Objective: properly handle error by wrapping all function calls in a try - catch block
+		i.e log out any errors to console
+
+
+
+printCharacterStats(4)
+printCharacterStats('ten')
+printCharacterStats(lO)
+
+// don't touch below this line
+function printCharacterStats(level) {	//level is no. passed
+if (isNaN(level)) {
+throw 'Parameter is not a number!‘		//if no. not passed 
+}
+console.log(‘Your character is level ${level}!‘)	//if no. passed
+}
+
+
+>Output:
+Parameter is not a number
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+try {							//try block will keep executing code
+	printCharacterStats(4)
+	printCharacterStats('ten')			//this bad call will stop execution //why? ten is not number
+	printCharacterStats(lO)
+
+} catch (err) {		//err = whatever was thrown 	//we expect err =string
+	console.log(err);
+}
+
+function printCharacterStats(level) {
+	if (isNaN(level)) {
+	throw 'Parameter is not a number!‘		//if no. not passed 
+}
+console.log(‘Your character is level ${level}!‘)	//if no. passed
+}
+}
+
+>
+Your character is level 4!
+Parameter is not a number!

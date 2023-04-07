@@ -1,0 +1,81 @@
+Why we need async code?
+
+HTTP requests need to be made asynchronously
+else, device will freeze until request comes back
+
+
+A) What is synchronous code? Code executes in order
+
+console.log("I print first")
+console.log("I print second")
+console.log("I print third")
+
+
+
+B) What is asynchronous processing? do multiple things at same time
+How to execute asynchronous code?  setTimeout()
+
+What setTimeout() does?  waits for ms before executing the function
+define waitTime , add as parameter in setTimeout() 
+
+
+Ex render something on browser + fetch data from remote server (HTTP call)
+
+const waitTImeMs = 100
+const callback = () => {
+	console.log("I print second");
+}
+
+console.log("I print first ")										//"I print first "
+setTimeout(callback, waitTimeMs)		//no time to wait 100Ms				//waits for 100 ms -> "I print second" is printed after 100 ms
+console.log("I print third")			//Why this printed 					//I print third				
+
+await sleep(waitTimeMs + 5)		//program waits for 105 ms			
+
+function sleep (ms) {
+	return new Promise(resolve => setTimeout((resolve,ms));
+}
+
+
+>
+console.log("I print first")
+console.log("I print third")
+console.log("I print second")
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+What happened above?
+well JsS runtime --> 100 ms doing other stuff, until that other code executed		//asynchronously
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Synchronous
+----------------------------------
+Process A		Process B
+
+control
+//wait			control
+control
+
+
+Asynchronous
+---------------------------------
+Process A		Process B
+
+control
+control			control
+control
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+const craftingCompleteWait = 2000;
+const combiningMaterialsWait = 1000
+const smeltingIronBarsWait = 500
+const shapingIronWait = 1500
+// Don't touch below this line
+setTimeout(() => console.log(‘Iron Longsword Complete!'), craftingCompleteWait)
+setTimeout(() => console.log(‘Combining Materials...'), combiningMaterialsWait)
+setTimeout(() => console.log(‘Smelting Iron Bars...'), smeltingIronBarsWait)
+setTimeout(() => console.log(‘Shaping Iron...'), shapingIronWait)
+console.log(‘Firing up the forge...')
+await sleep(2500)
+function sleep(ms) {
+
+return new Promise((resolve) => setTimeout(resolve, ms))
+}
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+

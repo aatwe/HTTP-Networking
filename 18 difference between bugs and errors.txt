@@ -1,0 +1,27 @@
+Bug = what unexpected things in code
+	What code is meant to do
+	What code is doing	//if not doing what its meant to do --> bug
+	//Conclusion: something wrong with code
+	
+	Ex of bug
+
+	add(2,3) --> 7
+	//it is a bug		//unexpected
+	
+	
+	//How to solve? change code -> biz decision					//Debugging			//Dont use try-catch
+
+Error = not always bad
+	 Conclusion:  expected, nothing wrong with code
+
+	How to solve? handle the error gracefully, show some error message	//Error handling at runtime	  //Dont use debugger
+												//What debugger does? one line at a time
+												//primitive style of debugging: add console.log statements at which points
+												
+	Ex. server is down	
+		User putting 10 char password --> for 12 input
+
+	
++++++++++++++++++++++++++++++++++++++++++++++==
+
+

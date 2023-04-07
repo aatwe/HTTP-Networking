@@ -1,0 +1,122 @@
+Q0) How webservers work?
+
+a) enter url
+b) DNS resolution	//browser --> request --> DNS server --> look up domain name : IP --> Host server IP found
+		//translates domain name to IP
+
+c) Open connection using http (iif website encrypted), HTTPS (if website not encrypted) request to host server
+d) Send HTTP/HTTPS request to server (Asking for resource html,image,video)
+e) Host /Web Server  receives request,
+			  processes	(execute server side code/ access db / interact with web services)
+			  generate response
+f) Host/Web server sends response back (with requested resource)
+g) Web page rendered using resources
+https : // en .wikipedia . ord/wiki/Miniatu re_pig
+
+
+Q1) Servers are most of time always on (listens)
+
+
+Q2) A good and smart webserver : listens only when client is active / biz hours?NO
+						AALWAYS!
+
+
+Q3) Can run a server even on our pc
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+How server finds our request? IP Address+ DNS
+
+
+1) IP
+My public IP:
+
+2405:201:3005:a23a:69cb:71c7:9437:2bd9	(My IPv6 Address)	64 bytes		(Separated by colon)
+
+49.36.18.80						(My IPv4 Address)	32 bytes		(Separated by dot)	//we running out
+
+
+Rule: each no. 0 - 255
+If ordering package online
+
+
+2) DNS : Maps IP to Site name
+
+//Amazon can change their IP name --> without affecting domain name //Change at DNS
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+https://en.wikipedia.org/wiki/Miniature_pig
+	______________
+	Domain name
+
+Domain name: part needed to look up IP at DNS Server
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Objective: look up ip for any domain
+
+How? Cloudflare-dns.com		
+a) Call cloud flare API by passing in domain
+b) get back response (JSON)
+
+//What returned object structure looks like?  //can see IP in this
+
+{"Status":0,"TC":false,"RD":true,"RA":true,"AD":true,"CD":false,
+  "Question":  [{"name":"api.boot.dev",
+		    "type":1
+}],
+"Answer": [{
+	"name":"api.boot.dev",
+	"type":1,
+	"TTL":3327,
+	"data":"34.111.29.119"
+ }]
+}
+
+
+c) get IP from JSON
+instead of console.log(respObject)
+
+JSONLint --> paste your json object		//what it does ? lints jSON object //so we can see and understand object better
+
+return respObject.Answer[0].data			// doing this is dangerous though, should add check if that field exists or not
+//Outputs:
+found IP address for domain api.boot.dev: 34.111.29.119
+
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+async function fetchIPAddress(domain) {
+
+const resp = await fetch(‘httpsz/lcloudflare-dns.com/dns-query?name=${domain}&type=A‘, {	//pass domain as variable
+ headers: {
+	 'accept': 'application/dns-json'
+	}
+})
+const respObject = await resp.json()
+//console.log(respObject)			//logs entire object it receives as response from cloud flare API to console
+
+return respObject.Answer[0].data
+
+}
+
+const domain = 'api.boot.dev'					//api domain
+const ipAddress = await fetchIPAddress(domain)		
+if(!ipAddress) {
+	console.log('something went wrong in fetch IPAddress')
+} else {
+
+}
+
+
+------------------------------------------------------------------------------------------------------------------------------------
+
+How to deploy your website on internet?
+0) Web server software
+1) Deploy on Netlify,GCP,Azure,AWS
+2) get IP address of your website from these cloud providers
+3) Buy domain name from registrar (Amazon,Google,Namecheap)
+4) tell your IP -> they update DNS
+

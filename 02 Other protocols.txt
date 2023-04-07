@@ -1,0 +1,38 @@
+ What format do we get data using http from server?
+
+Q1) Why in below not getting response in JSON format error
+
+
+const apiKey = generateKey()
+const itemURL = 'https://api.boot.dev/vl/courses_rest_api/learn-http/items'
+const items = await getlData()
+
+logItems(items)
+
+
+async function getData(url) {}
+
+...
+
+
+Soln: pass itemURL
+
+const apiKey = generateKey()
+const itemURL = 'https://api.boot.dev/vl/courses_rest_api/learn-http/items'
+const items = await getlData(itemURL)
+
+logItems(items)
+
+
+async function getData(url) {}
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Q2) Are all URL specific to http? NO, need to add prefix , tells computer what protocol is used by the request
+Q3) What other protocols are used? HTTPS,Mail2,PSQL
+
+
+Q4) Frontend : Code on your device --> Backend 1: Video data --> Backend 2: Comment data
+       act server			    act client		act server				act client
+       
+
+a) 

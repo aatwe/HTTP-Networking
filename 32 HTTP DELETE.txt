@@ -1,0 +1,124 @@
+a) Use HTTP delete using Fetch API
+
+	Given: url of api : /location/id
+		//id = wha tresource we are working with
+
+	a.1) specify URL
+	a.2) make a fetch request	to URL	
+		a.2.1) use method: DELTE
+		
+const url = 'https : //api. boot . dev/vl/cou rses_rest_api/lea rn-http/locations/52fdfc07-2182—454f-963f-5f0f93621d72'
+
+await fetch(url, {
+	method : 'DELETE',
+	mode: 'cors'
+})
+
+
+
+b) Assignment:
+
+Objective: delete player accounts : write fetch() for DELETE
+		
+
+	b.1) specify URL
+	b.2) make a fetch request	to URL	
+		a.2.1) use method: DELETE
+		
+		a.2.2) fetch function
+	
+		a.2.3) Get users
+
+		a.2.4) Delete Users with specified user id
+
+		a.2.5) Again Get users
+		
+
+async function deleteUser(baseURL, id , apiKey) {
+	const fullURL = '${baseURL}/${id}'			//thing we are deleteing in path
+	const resp = await fetch(fullURL, {
+		method: 'DELETE',
+		mode: 'cors',
+		headers: {
+		 'X-API-Key': apiKey
+		
+		}
+	})
+}
+
+const userId = '@194fdc2-fa2f-4cc0-81d3—ff12045b73c8'
+const generatedKey = generateKey()
+const url = 'https://api.boot.dev/v1/courses_rest_api/learn—http/
+async function getUsers(url, apiKey) {
+const response = await fetch(url, {
+
+method: 'GET',
+mode: 'cors',
+headers: {
+
+'X—API-Key': apiKey
+}
+})
+return response.json()
+}
+
+function generateKey() {
+	const characters = 'ABCDEF0123456789'
+	let result = ' '
+	for (int i = 0; i< 16; i++) {
+		result  += characters.charAt(Math.floor(Math.random()* characters.length))
+	}
+	return result
+}
+
+functionl logUsers(users) {
+	console.log("Logging user records")
+	for(const user of users) {
+		console.log('User uuid: ${user.id}, Character name: ${user.characterName}, Class: $...')
+	}
+}
+
+
+//Get users
+const users = await getUsers(url, generatedKey)
+logUsers(users)
+console.log('—--')
+
+//Delete users
+await deleteUser(url, userId, generatedKey)
+console.log(‘Deleted user with id: ${userId}‘)
+console.log('—--')
+
+
+//Again get users
+const newUsers = await getUsers(url, generatedKey)
+logUsers(newUsers)
+console.log('---')
+
+
+>Output: //Lane deleted
+Logging user records:
+User uuid: 0194fdc2—fa2f—4cc0-81d3-ff12045b73c8, Character name: Grundorf, Class:
+Warrior, Level: 14, User: Lane
+User uuid: 52fdfc07-2182-454f-963f—5f0f9a621d72, Character name: Varus, Class: Fighter,
+Level: 1, User: Allan
+User uuid: 2f8282cb-e2f9-496f-b144—c0aa4ced56db, Character name: Velithria, Class:
+Wizard, Level: 6, User: Tim
+
+
+---
+Deleted user with id:
+---
+Logging user interface
+Deleted user with id: 0194fdc2—fa2f-4cc0—81d3-ff12045b73c8
+
+
+Logging user records:
+
+User uuid: 52fdfc07-2182-454f—963f—5f0f9a621d72, Character name: Varus, Class: Fighter,
+Level: 1, User: Allan
+
+User uuid: 2f8282cb-e2f9—496f—b144-c0aa4ced56db, Character name: Velithria, Class:
+Wizard, Level: 6, User: Tim
+
+User uuid: 85fbe72b—6064—4890-84aS—31f967898df5, Character name: Myra, Class: Warlock,

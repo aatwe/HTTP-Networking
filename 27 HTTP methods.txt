@@ -1,0 +1,175 @@
+a) What is http method? Why do we need it? What http method does?
+
+	http method is mandatory in a http request
+	What methods we have used?
+		GET,POST,PUT		
+
+
+b) MDN Docs
+
+
+	b.1) *GET :gets copy of data from server
+		Ex getting copy of proile photo from server
+		server data unchanged / not changed
+
+	How to make GET request? fetch API?	
+		0) use fetch inbuilt browser function  //does what? returns  a promise  //we wait for fetch calls
+		1) parameter 1 :for fetch() is = url = what url we are makigng request to
+		2) parameter 2 :for fetch() is  options object
+		3) specify method : GET
+			
+		4) specify mode cors : tells browser to not to kill request for security purpose	
+						//allows browser to make http request
+		5) specify headers object : 'string' : 'string' key value pairs
+		  5.1) specify on what client
+		6) Body also, but omitted since not for GET requests
+
+	await fetch (url, {
+		method: 'GET',
+		mode: 'cors',
+		headers: {
+		   ' sec-ch-ua-platform' : 'macOS'
+		}
+	})
+		
+Assignment:
+
+
+	b.1) Objective: write a reusable function
+		does what? retrieve all data of fantasy quest users from server
+
+	b.2) 	typicall only admins can get all user data for entire server
+	b.3) 	How we get data? using apiKey provided to function				//const resp = await fetch(url,)
+	b.4) 	whatever response we get, return resulting JSON data from response and await	//resp.json()
+		this response will be JSON data in body, we parse JSON --> JS object --->  return JS object				
+
+	b.5) 	Check Output
+			Character name: Grundorf, Class: Warrior, Level: 14, User: Lane
+			Character name: Varus, Class: Fighter, Level: 1, User: Allan
+			Character name: Velithria, Class: Wizard, Level: 6, User: Tim
+			Character name: Myra, Class: Warlock, Level: 8, User: Sam
+			Character name: Vandil, Class: Hunter, Level: 9, User: Adam I
+			Character name: Horkin, Class: Ranger, Level: 6, User: Ben
+
+
+
+
+async function getUsers(url, apiKey) {
+	const resp = await fetch(url, {
+	   method: 'GET',
+	   mode: 'cors'	
+ 	   headers: {			//for authentication proof of who we are
+		'X-API-Key' : apiKey
+	}
+	})
+	return await resp.json()	//note this is the body
+}
+
+// Don't touch below this line
+const generatedKey = generateKey()
+const url = 'https://api.boot.dev/vl/courses_rest_api/learn-httpfl
+const users = await getUsers(url, generatedKey)
+logUsers(users)
+function generateKey() {
+const characters = 'ABCDEF0123456789'
+let result = "
+for (let i = 0; i < 16; i++) {
+result += characters.charAt(Math.floor(Math.random() * charac
+}
+return result
+
+>Output: Character name: Grundorf, Class: Warrior, Level: 14, User: Lane
+Character name: Varus, Class: Fighter, Level: 1, User: Allan
+Character name: Velithria, Class: Wizard, Level: 6, User: Tim
+Character name: Myra, Class: Warlock, Level: 8, User: Sam
+Character name: Vandil, Class: Hunter, Level: 9, User: Adam I
+Character name: Horkin, Class: Ranger, Level: 6, User: Ben
+
+------------------------------------------
+
+Original code Question:
+async function getUsers(url, apiKey) {
+
+}
+
+// Don't touch below this line
+const generatedKey = generateKey()
+const url = 'https://api.boot.dev/vl/courses_rest_api/learn-httpfl
+const users = await getUsers(url, generatedKey)
+logUsers(users)
+function generateKey() {
+const characters = 'ABCDEF0123456789'
+let result = "
+for (let i = 0; i < 16; i++) {
+result += characters.charAt(Math.floor(Math.random() * charac
+}
+return result
+				
+------------------------------------------
+
+
+
+	b.1) Understand code:
+		b.1.1) getUsers and body
+		b.1.2) generate a new api key, why? api key will authorize access to an api
+		b.1.3) specify url
+		b.1.4) logUsers() to iterate over all the users we get  //log out some information	
+		b.1.5)
+
+async function getUsers(url, apiKey) {
+	const resp = await fetch(url, {
+	   method: 'GET',
+	   mode: 'cors'	
+ 	   headers: {			//for authentication proof of who we are
+		'X-API-Key' : apiKey
+	}
+	})
+	return await resp.json()	//note this is the body
+}
+
+// Don't touch below this line
+const generatedKey = generateKey()
+const url = 'https://api.boot.dev/vl/courses_rest_api/learn-httpfl	//specify url
+const users = await getUsers(url, generatedKey)			//hit end point on bootdev server
+logUsers(users)								//get and log the users
+
+function generateKey() {
+const characters = 'ABCDEF0123456789'
+let result = "
+for (let i = 0; i < 16; i++) {
+result += characters.charAt(Math.floor(Math.random() * charac
+}
+return result
+
+function logUsers(users) { I
+for (const user of users) {
+console.log(‘Character name: ${user.characterName}, Class: ${user.class}, Level: ${user.lev
+}
+}
+
+
+
+
+
+	HEAD :
+
+
+	*POST
+
+
+	*PUT
+
+
+	*DELETE
+
+
+	CONNECT
+
+
+	OPTIONS
+
+
+	TRACE
+
+
+	PATCH

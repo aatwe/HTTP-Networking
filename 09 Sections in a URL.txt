@@ -1,0 +1,56 @@
+http://testuser:testpass@testdomain.com:808@/testpath?testsearch=testvalue#testhash
+
+
+
+http : using which protocol url accessed	//http protocol
+testuser: username				//optional
+:	  			: delimeter
+testpass			: password				//optional	//generally in form, not in url
+@ 	  			: only needed when included username and password : separates
+8080	  			: port				//used to access info on server	//default port = 80 (http) //default port=  443(https)
+/	  			: slash
+testpath			: path				//route to different pages
+?	  			: question mark
+testsearch=testvalue	: query parameter
+key	    	value
+testhash			: hash/fragment		//links to a specific section on page	//what use? can be out of context of website
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Use URL Api to split apart URL
+
+function printURLParts(urlString) {
+const urlObj = new URL(urlString)
+
+// ?
+
+console.log('protocol: ${urlObj.protocol}')		> http:
+console.log('protocol: ${urlObj.username}')		> dragonslayer
+console.log('protocol: ${urlObj.password}')		> xxx
+console.log('protocol: ${urlObj.hostname}')		>fantasyquest.com
+console.log('protocol: ${urlObj.port}')			>8080
+console.log('protocol: ${urlObj.pathname}')		>maps
+console.log('protocol: ${urlObj.search}')		>?sort=rank			//query parameter
+console.log('protocol: ${urlObj.hash}')			>#id				//fragment
+
+
+
+
+
+}
+// don't touch below this line
+const fantasyQuestURL = 'http://dragonslayer:pwn3d@fantasyquest.com:8080/maps?sort=rank#id'
+printURLParts(fantasyQuestURL)
+
+
+1) Use case: 
+Accessing test version of website by changing port #
+
+
+2) Is this valid URL? looks -> valid protocol + domain		//Mandatory
+'http://fantasyquest.app'
+
+
+
+What other protocols we can use? HTTP,FTP,HTTPS
+
+

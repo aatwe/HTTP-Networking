@@ -1,0 +1,152 @@
+const json = '{"title": "Avengers Endgame", "Rating":4.7, "inTheatres":false}';		//JSON string looks like JS object / structured as JS object
+const obj = JSDN.parse(json)			//get object back using JSON.parse()
+
+console.log(obj.title)				//Use dot operator to access fields of object
+
+// Avengers Endgame
+
+
+
+a) How developers write tests? mock/ fake data looking like real data
+
+Ex working with a server, expecting data response from server (JS object)
+How can we test? build a string look alike. and test with that
+After response working can plug in server again with rest of code
+
+mocking out data makes testing easier
+//useful when server has certain conditions
+	//instead of individually checking conditions
+	//mock the data response, and check if your code can handle it
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++=
+
+a) verify backend JSON data is correct or not	//else will have to ask backend developers again
+
+b) Objective : complete parse location function
+		how?
+			use try-catch block to safely call JSON.parse()	//why? JSON.parse() throws an error if given a string that aint valid JSON
+			location string is provided
+			
+
+		if string parsed success --> use printLocationObj()-> print the parsed object
+		if error -> log on screen
+	
+
+c) 	
+	c.1) pass some invalid data to JSON.parse()
+		//What error? Unexpected token 'd'
+	c.2)
+
+function parseLocation(locationString) {
+try {
+	JSON.parse('data')		//note how this is not valid json
+}
+catch(err) {
+	console.log('invalid json string')
+ }
+}
+// don't touch below this line
+function printLocationObj(parsed) {
+console.log(‘id: ${parsed.id}‘)
+console.log(‘discovered: ${parsed.discovered}‘)
+console.log(‘name: ${parsed.name}‘)
+console.log(‘recommendedLevel: ${parsed.recommendedLevel}‘)
+}
+
+
+	c.3) Output:
+		Invalid JSON string
+		Invalid JSON string
+
+	c.4) parse actual location data
+		c.4.1) dont forget to save it as JS object (add const)
+		c.4.2) Use printLocationObj() , pass  locationObj
+		c.4.3) What output?
+		invalid json string
+		---
+		id: 0194fdc2-fa2f—4cc0—81d3—ff12045b73c8
+		discovered: false
+		name: Bandit Camp
+		recommendedLevel: 14
+
+	
+
+
+Code: 
+function parseLocation(locationString) {
+try {
+	const locationObj = JSON.parse(locationString)		//note how this is not valid json
+	printLocationObj(locationObj)
+}
+catch(err) {
+	console.log('invalid json string')
+ }
+}
+// don't touch below this line
+function printLocationObj(parsed) {
+console.log(‘id: ${parsed.id}‘)
+console.log(‘discovered: ${parsed.discovered}‘)
+console.log(‘name: ${parsed.name}‘)
+console.log(‘recommendedLevel: ${parsed.recommendedLevel}‘)
+}
+
+
+parseLocation(‘		//represents our mock data that we will pass and test it out
+{
+"discovered": false,
+"id": "0194fdc2-fa2f-4cc0-81d3-ff12045b73c8",
+"name": "Bandit Camp",
+"recommendedLevel": 14
+‘)				//note } missing //invalid json
+
+console.log('---')
+
+
+parseLocation(‘
+{
+"discovered": false,
+"id": "0194fdc2-faZf-4cc0—81d3-ff12045b73c8",
+I'name": "Bandit Camp",
+"redommendedLevel": 14
+} I				//note: valid json
+‘)
+
+
+	c.5)
+
+
+
+
+d) Code: (earlier)
+
+
+//
+function parseLocation(locationString) {
+//?
+}
+// don't touch below this line
+function printLocationObj(parsed) {
+console.log(‘id: ${parsed.id}‘)
+console.log(‘discovered: ${parsed.discovered}‘)
+console.log(‘name: ${parsed.name}‘)
+console.log(‘recommendedLevel: ${parsed.recommendedLevel}‘)
+}
+
+parseLocation(‘
+{
+"discovered": false,
+"id": "0194fdc2-fa2f-4cc0-81d3-ff12045b73c8",
+"name": "Bandit Camp",
+"recommendedLevel": 14
+‘)
+
+console.log('---')
+
+
+parseLocation(‘
+{
+"discovered": false,
+"id": "0194fdc2-faZf-4cc0—81d3-ff12045b73c8",
+I'name": "Bandit Camp",
+"redommendedLevel": 14
+} I
+‘)

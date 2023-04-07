@@ -1,0 +1,18 @@
+Objective: parse URL string---> URl object
+
+a) Why break domain string into object? to extract domain name etc
+
+https://example.com	---> break into ----> JS Object
+
+
+b) How?Javascript URL API
+
+function getDomainNameFromURL(url) {		//url = url string
+	const urlObj = new URL(url)
+	return urlObj.hostname			//Check MDN docs for more	//>The domain name for https://boot.dev/learn/learn—python is boot.dev
+	console.log(url)				//> https://boot.dev/learn/learn-python
+}
+
+const bootdevURL = 'https://boot.dev/learn/learn—python'
+const domainName = getDomainNameFromURL(bootdevURL)
+console.log(‘The domain name for ${bootdevURL} is ${domainName}‘)

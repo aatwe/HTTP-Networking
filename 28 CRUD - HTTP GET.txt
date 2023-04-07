@@ -1,0 +1,139 @@
+a) almost all action with a webserver is a CRUD one	
+
+
+b) We use GET,POST and PUT to do CRUD
+
+	Create --- POST
+	Read   --- GET
+	Update ---PUT/PATCH
+	Delete --- DELETE 
+
+
+
+Above are conventions in HTTP for RESTful servers
+
+
+c) we learnt get
+	What POST request looks like
+
+
+await fetch(url, {
+method: 'POST',
+mode: 'cors',
+headers: {
+'Content-Type': 'application/json'		//always good to specify what type of data sending to server // so they can parse correctly
+}.
+body: JSON.stringify(data)			//note : POST has body
+ll
+
+	c.1) Objective: Save some newly created characters on fantasyquest server
+
+	c.2) where things can go wrong? ex send post reqest to server to create user twice
+				//smart server will recognize duplicate reques
+		Given: using getUsers() we already wrote
+		//use it to test and verify userToCreate
+
+	c.3) return response's JSON body
+
+	c.3) Check output
+	1)
+
+
+async function createUser(apiKey, url, data) {		//apiKey(make sure working),url and data are parameters
+	//?
+	const resp = await fetch(url, {			//make fetch request to url to make a POST request
+		method: 'POST',				//
+		mode: 'cors',					//
+		headers: {
+			'Content-Type': 'application/json',	//tell server what type of data we are sending
+			'X-API-Key': apiKey				//for authentication
+		},
+		body: JSON.stringify(data)						
+	})
+	return await resp.json()				//why await? resp.json() awaits promise
+}
+
+
+const userToCreate = {					//Send data in body 	//user JS to create
+	characterName: 'Grendel',
+	class: 'Warrior',
+	level: 1,
+	pvanabled: false,
+	user: {
+	name: 'Allan',
+	location: 'USA',
+	age: 27
+   }
+}
+
+const generatedKey = generateKey()
+const url = 'https://api.boot.dev/vl/courses_rest_api/learn-http/
+
+async function getUsers(url, apiKey) {
+	const response = await fetch(url, {
+		method: 'GET',
+		mode: 'cors',
+		headers: {
+			'X—API-Key': apiKey
+		}
+		})
+		return response.json()
+}
+
+function generateKey() {
+	const characters = 'ABCDEF0123456789'
+	let result = "
+	for (let i = 0; i < 16; i++) {
+		result += characters.charAt(Math.floor(Math.random() * charaC'
+	}
+	return result
+}
+
+
+function logUsers(users) {										
+for (const user of users) {										//
+console.log(‘Character name: ${user.characterName}, Class: $0
+}
+}
+
+
+console.log('Retrieving user data...')								//logging all the users
+const userDataFirst = await getUsers(url, generatedKey)					//how to log? store from getUsers, use logUsers()
+logUsers(userDataFirst)
+console.log('--')
+
+console.log('Creating new character...') 								//creating a new user
+const creationResponse = await createUser(generatedKey, url, user				//how to create a new user? store from createUser, 
+console.log(‘Creation response body: ${JSON.stringify(creationRe$				//JSON.stringify response
+console.log('—--')
+
+
+console.log('Retrieving user data...')								//get all users again
+const userDataSecond = await getUsers(url, generatedKey)
+logUsers(userdataSecond)
+console.log('---')
+
+
+>Output:
+
+Character name: Grundorf, Class: Warrior, Level: 14, User: Lane
+Character name: Varus, Class: Fighter, Level: 1, User: Allan
+Character name: Velithria, Class: Wizard, Level: 6, User: Tim
+Character name: Myra, Class: Warlock, Level: 8, User: Sam
+Character name: Vandil, Class: Hunter, Level: 9, User: Adam
+Character name: Horkin, Class: Ranger, Level: 6, User: Ben
+Character name: Jaina, Class: Rogue, Level: 8, User: Erika
+Character name: Goosk, Class: Paladin, Level: 6, User: Danielle
+
+----
+
+Creating new character
+Creation response body:
+{"characterName" : "Grendel" , "class" : "Warrio r" , "id" : "83472ed -6 fid— —
+b7f09e757ba9","level":1,"pvanabled":false,"user": II V II
+{"name":"Allan","location":"USA","age":27}} I I I 3‘...
+
+
+----
+
+Retrieving User data...

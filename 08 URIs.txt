@@ -1,0 +1,17 @@
+a) What? Uniform Resource Identifier
+
+	Super set of URL
+
+
+
+		__________________
+	  ____/		URI	    \____
+_____	/					    \_____________
+|_______________________________________________	|
+|  URN				|		URL		     |	| 
+|  urn:isbn"0-486-27557-4	|	https://google.com	     |	|
+|_____________________|________________________|	|
+__________________________________________________
+//note: A URL is valid URI	//good to know
+
+All URIs are not URL

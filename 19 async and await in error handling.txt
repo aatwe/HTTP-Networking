@@ -1,0 +1,68 @@
+b) How async and await make error handling easier
+
+
+ b.1) non async / raw promise
+
+
+	if everything works well in promise
+		  .then handler will resolve the promise
+	If something goes wrong in promise  , ex Internet down, server down
+		  .catch
+
+	fetchUser().then(function(user){		//.then handler --> resolves promise --> outputs user object
+	console.log(‘user fetched: ${user}‘)				//we log that user  object
+	}).catch(function(err){			//for ex internet goes down, .catch handler fires
+	console.log(‘an error was thrown: ${err}‘)
+	}):
+
+
+
+b/2) async/  await		//Normal JavaScript error handling	//feels like traditional javascript
+
+
+	while awaiting a promise 
+		// if a promise rejects / something goes wrong --> error is thrown -> catch in block
+		//if  thrown within an async function , same as rejecting a promise
+
+
+	try {
+		const user = await fetchUser()
+		console.log('user fetched: ${user}')
+	} catch (err) {
+		console.log('an error was thrown: ${err}')
+	}
+
+
+
+++++++++++++++++++++++++++++++++++++
+Assignment
+
+const leaderboard = await fetchLeaderBoard()
+console.log(leaderboard)
+// don't touch below this line
+async function fetchLeaderBoard() {
+const response = await fetch('https://fantasyquest.servers')
+return response.json()
+}
+
+
+Objective:
+	Given: game code,
+	interacting with fantasy quest server		//learning : unhandled JS error can kill execution	
+	trying to fetch worldwide leaderboard from fantasy quest server
+	try to handle the error ---> display message to users
+
+
+	
+Answer:
+try {
+const leaderboard = await fetchLeaderBoard()
+console.log(leaderboard)
+} catch (err) {
+console.log('Our servers are down, but we will be up and running soon again')
+}
+// don't touch below this line
+async function fetchLeaderBoard() {
+const response = await fetch('https://fantasyquest.servers')		//this url of server is down
+return response.json()
+}

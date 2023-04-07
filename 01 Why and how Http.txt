@@ -1,0 +1,61 @@
+Image sharing
+
+	a) How to share images before instagram? HTTP protocol
+
+	b) every website has http://
+	means every website uses this
+
+
+	c) What is a protocol? rules we have agreed upon
+		How computers communicate? following rules
+		What protocol does? extract meaning from passed info
+
+
+
+Objective: Write JS code --> make requests to backend server via HTTP -> get Item data
+Which server? Fantasy quest server
+How to access server?url
+How? HTTP
+a) write function that gets data from url
+b) logs items
+c) Check if got items or not
+
+
+HTTP is request -- response
+
+Client = sender of request message (Comes first)
+Serevr= sender of response message
+
+
++++Successfully got data via HTTP+++++++++++++++++++++++++++++++++++++++++++++++++
+
+const apiKey = generateKey()
+const items = await getItemData()
+logItems(items)
+
+
+async function getItemData() {		
+const response = await fetch('https://api.boot.dev/v1/courses_rest_api/learn-http/items')	//gets data from this url
+method: 'GET',
+mode: 'cors', I
+headers: {
+'X-API—Key': apiKey,
+'Content-Type': 'application/json'
+}
+})
+return response.json()
+
+function generateKey() {
+const characters = 'ABCDEF0123456789'
+let result = "
+for (let i = 0; i < 16; i++){
+result += characters.charAt(Math.floor(Math.random() * charac
+}
+return result
+
+
+function logItemfl(items) {
+for (const item of items) {
+console.log(item.name)
+}
+l

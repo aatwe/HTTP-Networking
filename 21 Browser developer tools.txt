@@ -1,0 +1,205 @@
+a) Show me how a request looks like
+
+a.1) General
+Request URL:
+
+Request Method: 
+
+Status Code:
+
+Referrer Policy
+
+a.2) Response Headers
+	Content-type: image/png
+a.3) Request Headers
+	Referer:
+	User-Agent
+
+
+
+General rules for any browser
+
+Q1) Why dev tools? view responses to client's requests
+
+a) right click -> inspect -> Dev tools
+
+
+b) Network
+	//All network activities done byr browser
+
+	Different requests ongoing
+
+	Ex 	JS making additional HTTP requests from browser back to server
+		fetch requests
+		HTML document  makign request
+			insid ehtml document can see response Headers
+				Response Headers
+					content-type : text/html
+		
+Q2) How long each network request takes? 
+	
+	2.1) Dev tools -> Network -> Refresh
+
+		fetch requests : ~100ms
+
+
+Q3) What 1 use case of header? meta data
+
+	another? Authentication
+
+	Ex on a website like boot dev, tracking progress, achievements etc are private information
+	Other people should not see this
+
+	How is this private info sent only to me? Authentication
+	Where is authentication done? in header of http requests
+
+Q4) Why are header useful? dont have to mud up request body information
+	
+	Conclusion: authentication info and meta data is in headers
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Assignment
+
+
+a) Given:
+	To avoid us overwriting user data,
+	backend team requires us to use X APY key header
+
+	What is APY key header?
+
+		X APY key = key inside header
+
+
+	How will we tell server that we are a different person?
+		set value to this key
+		
+
+
+b) Summary:
+	b.1) get location
+	b.2) make a change to what location we got with newLocationData using putLocation
+	b.3) put back the changed location		//make sure it is changed
+
+c) Code:
+
+
+
+const generatedApiKey = generateKey()			//=What api key used to get data
+const url = 'https://api.boot.dev/vl/courses_rest_api/learn-http/locations/52fdfc97—2182-454f-9t
+const newLocationData = {
+	'discovered': false,
+	'id': 'SZfdfc07-2182—454f—963f—Sfef9a621d72',
+	'name': 'Bloodstone Swamp',
+	'recommendedLevel': 10
+}
+
+//get old location
+const oldLocation = await getLocationResponse(generatedApiKey, url)
+console.log(‘Got old locationz‘)
+console.log(‘— name: ${oldLocation.name}, recommendedLevel: ${oldLocation.recommendedLevel}‘)
+console.log('--')
+
+
+//updates our location on server
+await putLocation(generatedApiKey, url, newLocationData)	//same api key used
+console.log('Location updated!')
+console.log('--')
+
+//log and display changes
+//const newGeneratedApiKey = generateKey()		//same api key used 	//this was the error ,comment it out
+const newLocation = await getLocationResponse(newGeneratedApiKey, url)
+console.log(‘Got new location:‘)
+console.log(‘- name: ${newLocation.name}, rccommendedLevel: S{newLocation.recommendedLeve1}‘)
+console.log('---')
+
+
+
+//gets location object from game server
+async function getLocationResponse(apiKey, url) {
+
+//Fetch call to server // to get location data		
+const response = await fetch(url, {
+method: 'GET'J '
+mode: 'cors',
+headers: {
+'X-API-Key': apiKey,
+'Content-Type': 'application/json'
+}
+})
+return response.json()
+}
+
+//HTTP method putLocation : does what? updates our location on server
+
+async function putLocation(apiKey, url, data) {
+const response = await fetch(ur1, {
+method: 'PUT', :
+mode: 'cors',
+headers: {
+'X-API-Key': apiKey,
+'Content-Type': 'application/json'
+}.
+body: JSON.stringify(data)
+})
+
+
+
+d) Output:
+
+Got.old location:
+- name: Heartfin Marsh, recommendedLevel: 1
+---
+Location updated!
+---
+Got new location:
+- name: Heartfin Marsh, recommendedLevel: 1
+---
+
+
+e) Figure out why not updating?
+
+e.1) What newLocationData looks like?
+
+const newLocationData = {
+	'discovered': false,
+	'id': 'SZfdfc07-2182—454f—963f—Sfef9a621d72',
+	'name': 'Bloodstone Swamp',
+	'recommendedLevel': 10
+}
+
+
+e.2) how api key variable is being passed
+ 
+e.2.1) What data will be updated to server
+
+const response = await Tetcnlurl, 1
+method: 'GET',
+mode: 'cors',
+headers: {
+'X—API-Key': apiKey.		//this is the variable that is added to header of fetch request
+'Content-Type': 'application/json'
+}
+})
+
+
+e.2.2) 
+What api key used to get data first time? generatedApiKey
+What api key used to put data first time? generatedApiKey
+What api key used to get data 2nd time? newgeneratedApiKey	//different
+
+Soln: Use same api key
+we removed const newGeneratedApiKey = generateKey()	
+
+
+Why important to use same apiKey? that variable is added to header as value
+
+>Output test
+
+---
+
+Location updated!
+---
+Got new location
+name: Bloodstrone Swamp, recommendedLevel: 10
+
+

@@ -1,0 +1,204 @@
+https://www.google.com/search?q=boot.dev
+
+
+a) What is a query parameter?  After "?"
+
+	Ex 
+	In https://www.google.com/search?q=boot.dev
+	q=boot.dev is a query parameter
+
+	we know headers in a http request are key-value pairs
+
+	query parameters in URL are also key-value pairs
+
+	key = q : value = boot.dev	
+
+b)  Why query parameter? way of asking data in slight different format from server
+
+Where are query parameters used?  get requests
+	//What do they do? change how data is sent back to us from server
+
+
+
+c) Assignment
+
+For ex
+backend team : has added special support for query parameters
+
+
+	How to use?
+
+	?sort=fieldName		//optionally add this at the end of URL
+
+		//fieldName : sort resource according to what?
+
+Objective: sort user records by their level (high level at top)
+		
+
+c.1) getUsers() definition
+	returns response
+
+
+c.2) baseURL
+c.3) apiKey
+c.4) call getUsers()	//pass baseURL and apiKey
+	store in users
+c.5)  loop over returned users
+	print user name and user level
+c.6) only url passed, instead pass
+
+
+
+
+Soln: console.log() below url to see what is passed
+	since only url passed, instead pass 	‘${url}?sort=level
+	//i.e use query parameter
+
+
+Conclusion: server is doing sorting for us using query parameter sort=level
+Use case: Google sorts 10 million responses, we cant do that at client
+
+-----------------------------------------------------------------------------------
+
+async function getUsers(url, apiKey) {
+	const fullURL = ‘${url}?sort=level‘			//const fullURL = ‘${url}‘		//only url passed
+	const response = await fetch(fullURL, {
+		method: 'GET',
+		mode: 'cors',
+		headers: {
+		'X-API—Key': apiKey
+	}
+	})
+	return response.json()
+}
+// don't touch below this line
+const baseURL = 'https://api.boot.dev/v1/courses_rest_api/learn—h
+const apiKey = generateKey()
+
+//getUsers function
+const users = await getUsers(baseURL, apiKey)
+for (const user of users) {
+console.log(‘got‘user with name: ${user.characterName}, and level: ${user.level}‘)
+}
+
+function generateKey() {
+	const characters = 'ABCDEF0123456789'
+	let result = "
+	for (let i = 0; i < 16; i++) {
+	result += characters.charAt(Math.floor(Math.random() * characters.length))
+}
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+c) How to find what query parameters to use,
+	What resource name to use?
+	What http methods supported?
+
+DOCUMENTATION of API
+
+
+Ex of using API
+
+How to use Stripe? 	.//What is stripe? way to do payments on website
+Check Stripe Documentation
+	Will tell what HTTP methods we can use
+
+	
+
+Q) What if feature we want not exists?
+	contact mainteners -> backend developers
+	ask them to maintain it
+
+
+d) Can we have multiple query parameters? Yes , how? & //ampersands
+
+Assignment:
+Objective: limit how many items player will receive, how? using 'limit = x' query parameter
+			x = how many records we are requesting
+		Also keep sorting items by 'quality'
+
+Given: baseURL and rarity is passed in lootTreasure()
+update it to perform above  requirement
+
+allowed values in rarity
+	rarity=  common	//1 item limit
+	rarity= Rare		//3 item limit
+	rarity= legenday 	//5 item limit
+
+
+Soln: Use & operatoor to sort by quality AND set limit  = whatever limit derived from logic of rarity passed
+
+	const fullURL = '${baseURL}?sort=quality&limit=${limit}'
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+a.1) set limit  starting value as null
+a.2) based on value of rarity --> set query parameter		//in lootTreasure()
+
+
+async function lootTreasure(baseURL, rarity) {
+	let limit = null;
+	if(rarity = 'common'){
+		limit = 1		
+	} else if (rarity = 'Rare') {
+		limit = 3
+	}
+	else if (rarity = 'legendary') {
+		limit = 5
+	}
+	if (limit === null) {
+		throw 'bad rarity provided'
+	}
+
+	const fullURL = '${baseURL}?sort=quality&limit=${limit}'
+	return await getItems(fullURL, apiKey)
+
+
+
+}
+
+
+const url = 'https://api.boot.dev/vl/courses_rest_api/learn—httpl.
+const apiKey = generateKey()
+const commonLoot = await lootTreasure(url, "Common")
+console.log("Looting common treasure chest...")
+for (const item of commonLoot) {
+
+console.log(‘Acquired a ${item.name} with quality score: ${item
+}
+console.log("---")
+
+
+//Initial code
+async function lootTreasure(baseURL, rarity) {
+	const fullURL = '${baseURL}'
+	return await getItems(fullURL, apiKey)
+}
+
+
+const url = 'https://api.boot.dev/vl/courses_rest_api/learn—httpl.
+const apiKey = generateKey()
+const commonLoot = await lootTreasure(url, "Common")
+console.log("Looting common treasure chest...")
+for (const item of commonLoot) {
+
+console.log(‘Acquired a ${item.name} with quality score: ${item
+}
+console.log("---")
+
+>Output:
+
+Looting common treasure chest...
+
+Acquired a Light Leather with quality score: 1			//Quality sorted 1 -> 4 ->6 
+Looting rare treasure chest...
+
+Acquired a Light Leather with quality score: 1
+Acquired a Gold Ore with quality score: 1
+Acquired a Healing Potion with quality score: 4
+Looting legendary treasure chest...
+
+Acquired a Light Leather with quality score: 1
+Acquired a Gold Ore with quality score: 1
+Acquired a Healing Potion with quality score: 4
+Acquired a Padded Leather with quality score: 6
+Acquired a Copper Ore with quality score: 6

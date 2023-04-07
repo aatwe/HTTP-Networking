@@ -1,0 +1,13 @@
+HTTPS:
+What is added on HTTP to make it secure?
+
+SSL		TLS
+
+
+
+Does HTTPS make me anon? NOO!
+only what info within request you sent is secured and can only be seen by server , HOW? Digital signature tech	//check out
+
+	//makes sure you know who you are communicating it
+		//no one can tap into your internet line and pretend to be your bank server
+	
